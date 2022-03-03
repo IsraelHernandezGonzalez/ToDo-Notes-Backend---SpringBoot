@@ -22,5 +22,22 @@ public interface ITodoRepository {
      * @param todoEntity
      * @return true, if ToDo was added correctly, otherwise, false is returned.
      */
-    boolean AddToDo(String user, TodoEntity todoEntity);
+    boolean AddToDo(String user, TodoEntity todoEntityAdd);
+    
+    /**
+     * Updates a ToDo note.
+     * @param user
+     * @param todoToUpdate
+     * @return true, if the ToDo was updated correctly, otherwise, false is returned.
+     */
+    boolean UpdateTodo(String user, TodoEntity todoToUpdate);
+
+    /**
+     * Deletes a ToDo note.
+     * @param user
+     * @param id
+     * @return true, if the ToDo note was deleted correctly, otherwise, false is returned.
+     */
+    boolean DeleteTodo(String user, int id);
+
 }

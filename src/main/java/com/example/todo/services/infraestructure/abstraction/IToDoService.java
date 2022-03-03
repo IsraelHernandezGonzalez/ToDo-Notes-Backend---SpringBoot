@@ -3,8 +3,12 @@ package com.example.todo.services.infraestructure.abstraction;
 import java.util.List;
 
 import com.example.todo.models.request.AddTodoRequestModel;
+import com.example.todo.models.request.UpdateTodoRequestModel;
 import com.example.todo.models.response.TodoResponseModel;
 
+/**
+ * Interface associated with the management of ToDo notes.
+ */
 public interface IToDoService {
 
     /**
@@ -18,8 +22,24 @@ public interface IToDoService {
      * Adds a ToDo note to the group of ones of an user.
      * @param user
      * @param todoToAdd ToDo to be added.
-     * @return true, if ToDo was added correctly, otherwise, false is returned.
+     * @return true, if the ToDo was added correctly, otherwise, false is returned.
      */
     boolean AddTodo(String user, AddTodoRequestModel todoToAdd);
+
+    /**
+     * Updates a ToDo note.
+     * @param user
+     * @param todoToUpdate
+     * @return true, if the ToDo was updated correctly, otherwise, false is returned.
+     */
+    boolean UpdateTodo(String user, UpdateTodoRequestModel todoToUpdate);
+
+    /**
+     * Deletes a ToDo note.
+     * @param user
+     * @param id
+     * @return true, if the ToDo note was deleted correctly, otherwise, false is returned.
+     */
+    boolean DeleteTodo(String user, int id);
     
 }

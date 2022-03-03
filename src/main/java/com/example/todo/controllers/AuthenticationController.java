@@ -1,21 +1,27 @@
 package com.example.todo.controllers;
 
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
+import com.example.todo.models.request.LoginRequestModel;
+import com.example.todo.services.infraestructure.abstraction.IAuthenticationervice;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 public class AuthenticationController {
 
-    @GetMapping("/Authentication/Login")
-	public boolean login(@RequestParam(value = "user", defaultValue = "") String user
-        , @RequestParam(value = "password", defaultValue = "") String password) {
-		        
-        if (user.equals("demo") && password.equals("demo")) {
-            return true;
-        }
+    @Autowired
+    private final IAuthenticationervice authenticationService;
 
-        return false;
+    public AuthenticationController(IAuthenticationervice authenticationService) {
+        this.authenticationService = authenticationService;
+    }
+
+    @PostMapping("/Authentication/Login")
+	public boolean login(@RequestBody LoginRequestModel loginModel) {
+	    return this.authenticationService.login(loginModel.getUser(), loginModel.getPassword());
 	}
     
 }

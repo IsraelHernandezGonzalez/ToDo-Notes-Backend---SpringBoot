@@ -1,6 +1,7 @@
-package com.example.todo.models.response;
+package com.example.todo.models.request;
 
-public class TodoResponseModel {
+public class UpdateTodoRequestModel {
+
     private int id;
     private String priority;
     private String group;
@@ -38,10 +39,11 @@ public class TodoResponseModel {
         this.note = note;
     }
 
-    public TodoResponseModel(int id, String priority, String group, String note) {
+    public UpdateTodoRequestModel(int id, String priority, String group, String note) {        
         this.setId(id);
         this.setPriority(priority);
         this.setGroup(group);
         this.setNote(note);
     }
+    
 }

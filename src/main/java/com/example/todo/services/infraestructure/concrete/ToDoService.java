@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.example.todo.models.request.AddTodoRequestModel;
+import com.example.todo.models.request.UpdateTodoRequestModel;
 import com.example.todo.models.response.TodoResponseModel;
 import com.example.todo.repository.Entities.TodoEntity;
 import com.example.todo.repository.infraestructure.abstraction.ITodoRepository;
@@ -23,6 +24,7 @@ public class ToDoService implements IToDoService {
         this.todoRepository = todoRepository;
     }
     
+    @Override
     public List<TodoResponseModel> GetToDoByUser(String user) {
         List<TodoResponseModel> listTodoResponseModel = new ArrayList<TodoResponseModel>();
         List<TodoEntity> listTodoEntity;
@@ -33,12 +35,13 @@ public class ToDoService implements IToDoService {
             listTodoResponseModel.add(new TodoResponseModel(todoEntity.getId()
                 , todoEntity.getPriority()
                 , todoEntity.getGroup()
-                , todoEntity.getToDoNote()));
+                , todoEntity.getNote()));
         }
         
         return listTodoResponseModel;
     }
 
+    @Override
     public boolean AddTodo(String user, AddTodoRequestModel todoToAdd) {
 
         TodoEntity todoEntity = new TodoEntity(-1
@@ -47,5 +50,21 @@ public class ToDoService implements IToDoService {
             , todoToAdd.getNote());
 
         return todoRepository.AddToDo(user, todoEntity);
+    }
+
+    @Override
+    public boolean UpdateTodo(String user, UpdateTodoRequestModel todoToUpdate) {
+
+        TodoEntity todoEntity = new TodoEntity(todoToUpdate.getId()
+            , todoToUpdate.getPriority()
+            , todoToUpdate.getGroup()
+            , todoToUpdate.getNote());
+
+        return todoRepository.UpdateTodo(user, todoEntity);
+    }
+
+    @Override
+    public boolean DeleteTodo(String user, int id) {       
+        return todoRepository.DeleteTodo(user, id);
     }
 }

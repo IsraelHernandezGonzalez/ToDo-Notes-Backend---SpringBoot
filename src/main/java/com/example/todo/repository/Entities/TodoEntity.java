@@ -4,7 +4,7 @@ public class TodoEntity {
     private int id;
     private String priority;
     private String group;
-    private String todoNote;
+    private String note;
 
     public int getId() {
         return this.id;
@@ -30,18 +30,18 @@ public class TodoEntity {
         this.group = group;
     }
 
-    public String getToDoNote() {
-        return this.todoNote;
+    public String getNote() {
+        return this.note;
     }
 
-    public void setToDoNote(String todoNote) {
-        this.todoNote = todoNote;
+    public void setNote(String note) {
+        this.note = note;
     }    
 
-    public TodoEntity(int id, String priority, String group, String todoNote) {
-        this.id = id;
-        this.priority = priority;
-        this.group = group;
-        this.todoNote = todoNote;
+    public TodoEntity(int id, String priority, String group, String note) {
+        this.setId(id);
+        this.setPriority(priority);
+        this.setGroup(group);
+        this.setNote(note);
     }
 }

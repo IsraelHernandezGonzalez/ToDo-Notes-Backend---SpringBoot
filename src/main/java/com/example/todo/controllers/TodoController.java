@@ -1,18 +1,21 @@
 package com.example.todo.controllers;
 
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.List;
+import java.util.logging.Logger;
 
 import com.example.todo.models.request.AddTodoRequestModel;
+import com.example.todo.models.request.UpdateTodoRequestModel;
 import com.example.todo.models.response.TodoResponseModel;
 import com.example.todo.services.infraestructure.abstraction.IToDoService;
 import com.example.todo.services.infraestructure.concrete.ToDoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
@@ -33,5 +36,22 @@ public class TodoController {
     @PostMapping("/ToDo/{user}")
     public boolean addTodo(@PathVariable String user, @RequestBody AddTodoRequestModel todoToAdd) {    
         return todoService.AddTodo(user, todoToAdd);
+    }
+
+    @DeleteMapping("/ToDo/{user}/{id}")
+    public boolean deleteTodo(@PathVariable String user, @PathVariable int id) {    
+
+        Logger.getLogger(TodoController.class.getName()).info("deleteTodo(" + Integer.toString(id) + ")");
+        
+        return todoService.DeleteTodo(user, id);
+    }
+
+    @PutMapping("/ToDo/{user}")
+    public boolean updateTodo(@PathVariable String user, @RequestBody UpdateTodoRequestModel todoToUpdate) {
+
+        Logger.getLogger(TodoController.class.getName()).info("updateTodo(...)");
+        
+        return todoService.UpdateTodo(user, todoToUpdate);
+
     }
 }
