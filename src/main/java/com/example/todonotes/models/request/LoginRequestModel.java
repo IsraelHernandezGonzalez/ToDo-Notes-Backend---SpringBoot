@@ -1,4 +1,4 @@
-package com.example.todo.models.request;
+package com.example.todonotes.models.request;
 
 public class LoginRequestModel {
     private String user;

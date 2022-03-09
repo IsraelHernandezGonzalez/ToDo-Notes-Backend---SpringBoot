@@ -1,8 +1,8 @@
-package com.example.todo.repository.infraestructure.abstraction;
+package com.example.todonotes.repository.infraestructure.abstraction;
 
 import java.util.List;
 
-import com.example.todo.repository.Entities.TodoEntity;
+import com.example.todonotes.repository.Entities.TodoEntity;
 
 /**
  * Interface to be implemented by the repository class related with the ToDo notes.

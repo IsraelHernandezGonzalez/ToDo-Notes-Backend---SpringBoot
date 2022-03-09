@@ -1,6 +1,7 @@
-package com.example.todo.repository.Entities;
+package com.example.todonotes.models.request;
 
-public class TodoEntity {
+public class UpdateTodoRequestModel {
+
     private int id;
     private String priority;
     private String group;
@@ -36,12 +37,13 @@ public class TodoEntity {
 
     public void setNote(String note) {
         this.note = note;
-    }    
+    }
 
-    public TodoEntity(int id, String priority, String group, String note) {
+    public UpdateTodoRequestModel(int id, String priority, String group, String note) {        
         this.setId(id);
         this.setPriority(priority);
         this.setGroup(group);
         this.setNote(note);
     }
+    
 }

@@ -1,4 +1,4 @@
-package com.example.todo;
+package com.example.todonotes;
 
 import java.util.Arrays;
 import java.util.Collections;

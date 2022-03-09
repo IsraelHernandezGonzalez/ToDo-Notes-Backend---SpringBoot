@@ -1,14 +1,14 @@
-package com.example.todo.controllers;
+package com.example.todonotes.controllers;
 
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.logging.Logger;
 
-import com.example.todo.models.request.AddTodoRequestModel;
-import com.example.todo.models.request.UpdateTodoRequestModel;
-import com.example.todo.models.response.TodoResponseModel;
-import com.example.todo.services.infraestructure.abstraction.IToDoService;
-import com.example.todo.services.infraestructure.concrete.ToDoService;
+import com.example.todonotes.models.request.AddTodoRequestModel;
+import com.example.todonotes.models.request.UpdateTodoRequestModel;
+import com.example.todonotes.models.response.TodoResponseModel;
+import com.example.todonotes.services.infraestructure.abstraction.IToDoService;
+import com.example.todonotes.services.infraestructure.concrete.ToDoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;

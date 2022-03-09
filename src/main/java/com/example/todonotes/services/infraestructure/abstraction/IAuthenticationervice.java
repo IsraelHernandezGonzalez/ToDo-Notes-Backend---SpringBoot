@@ -1,4 +1,4 @@
-package com.example.todo.services.infraestructure.abstraction;
+package com.example.todonotes.services.infraestructure.abstraction;
 
 /**
  * Interface associated with the management of user authentication.

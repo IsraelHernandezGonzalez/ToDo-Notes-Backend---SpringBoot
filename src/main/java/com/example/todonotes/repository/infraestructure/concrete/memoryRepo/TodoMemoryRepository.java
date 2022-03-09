@@ -1,4 +1,4 @@
-package com.example.todo.repository.infraestructure.concrete.memoryRepo;
+package com.example.todonotes.repository.infraestructure.concrete.memoryRepo;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 
-import com.example.todo.repository.Entities.TodoEntity;
-import com.example.todo.repository.infraestructure.abstraction.ITodoRepository;
+import com.example.todonotes.repository.Entities.TodoEntity;
+import com.example.todonotes.repository.infraestructure.abstraction.ITodoRepository;
 
 import org.springframework.stereotype.Repository;
 

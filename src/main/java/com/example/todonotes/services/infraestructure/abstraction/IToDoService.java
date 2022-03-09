@@ -1,10 +1,10 @@
-package com.example.todo.services.infraestructure.abstraction;
+package com.example.todonotes.services.infraestructure.abstraction;
 
 import java.util.List;
 
-import com.example.todo.models.request.AddTodoRequestModel;
-import com.example.todo.models.request.UpdateTodoRequestModel;
-import com.example.todo.models.response.TodoResponseModel;
+import com.example.todonotes.models.request.AddTodoRequestModel;
+import com.example.todonotes.models.request.UpdateTodoRequestModel;
+import com.example.todonotes.models.response.TodoResponseModel;
 
 /**
  * Interface associated with the management of ToDo notes.

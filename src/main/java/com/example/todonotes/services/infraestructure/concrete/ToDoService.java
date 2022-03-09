@@ -1,17 +1,16 @@
-package com.example.todo.services.infraestructure.concrete;
+package com.example.todonotes.services.infraestructure.concrete;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.todonotes.models.request.AddTodoRequestModel;
+import com.example.todonotes.models.request.UpdateTodoRequestModel;
+import com.example.todonotes.models.response.TodoResponseModel;
+import com.example.todonotes.repository.Entities.TodoEntity;
+import com.example.todonotes.repository.infraestructure.abstraction.ITodoRepository;
+import com.example.todonotes.services.infraestructure.abstraction.IToDoService;
+
 import org.springframework.stereotype.Service;
-
-import com.example.todo.models.request.AddTodoRequestModel;
-import com.example.todo.models.request.UpdateTodoRequestModel;
-import com.example.todo.models.response.TodoResponseModel;
-import com.example.todo.repository.Entities.TodoEntity;
-import com.example.todo.repository.infraestructure.abstraction.ITodoRepository;
-import com.example.todo.services.infraestructure.abstraction.IToDoService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
