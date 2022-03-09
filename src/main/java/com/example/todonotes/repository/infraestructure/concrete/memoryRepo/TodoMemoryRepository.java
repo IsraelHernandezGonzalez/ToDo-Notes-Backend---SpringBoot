@@ -11,6 +11,9 @@ import com.example.todonotes.repository.infraestructure.abstraction.ITodoReposit
 
 import org.springframework.stereotype.Repository;
 
+/**
+ * Implementation of the login associated with the ToDo notes repository in memory.
+ */
 @Repository
 public class TodoMemoryRepository implements ITodoRepository {
   
@@ -30,7 +33,7 @@ public class TodoMemoryRepository implements ITodoRepository {
         listUsersToDos.put("demo", listToDo);
     }
 
-    public List<TodoEntity> GetToDo(String user) {
+    public List<TodoEntity> getToDo(String user) {
 
         if (this.listUsersToDos.containsKey(user) == false) {
             return new ArrayList<TodoEntity>();
@@ -39,9 +42,9 @@ public class TodoMemoryRepository implements ITodoRepository {
         return this.listUsersToDos.get(user);
     }
 
-    public boolean AddToDo(String user, TodoEntity todoEntity) {
+    public boolean addToDo(String user, TodoEntity todoEntity) {
 
-        List<TodoEntity> listToDo = GetToDo(user);
+        List<TodoEntity> listToDo = getToDo(user);
 
         // Look for a new Id.
         int newId = 0;
@@ -58,9 +61,9 @@ public class TodoMemoryRepository implements ITodoRepository {
     }
 
     @Override
-    public boolean UpdateTodo(String user, TodoEntity todoToUpdate) {
+    public boolean updateTodo(String user, TodoEntity todoToUpdate) {
         
-        List<TodoEntity> listToDo = GetToDo(user);
+        List<TodoEntity> listToDo = getToDo(user);
 
         for (TodoEntity itemTodo : listToDo) {
 
@@ -77,9 +80,9 @@ public class TodoMemoryRepository implements ITodoRepository {
     }
 
     @Override
-    public boolean DeleteTodo(String user, int id) {
+    public boolean deleteTodo(String user, int id) {
         
-        List<TodoEntity> listToDo = GetToDo(user);
+        List<TodoEntity> listToDo = getToDo(user);
 
         Predicate<TodoEntity> filter = item -> item.getId() == id;
         return listToDo.removeIf(filter);

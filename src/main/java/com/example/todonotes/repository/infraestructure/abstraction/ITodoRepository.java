@@ -14,7 +14,7 @@ public interface ITodoRepository {
      * @param user
      * @return List of ToDo notes of the specified user.
      */
-    List<TodoEntity> GetToDo(String user);
+    List<TodoEntity> getToDo(String user);
 
     /**
      * Adds a ToDo note of an user.
@@ -22,7 +22,7 @@ public interface ITodoRepository {
      * @param todoEntity
      * @return true, if ToDo was added correctly, otherwise, false is returned.
      */
-    boolean AddToDo(String user, TodoEntity todoEntityAdd);
+    boolean addToDo(String user, TodoEntity todoEntityAdd);
     
     /**
      * Updates a ToDo note.
@@ -30,7 +30,7 @@ public interface ITodoRepository {
      * @param todoToUpdate
      * @return true, if the ToDo was updated correctly, otherwise, false is returned.
      */
-    boolean UpdateTodo(String user, TodoEntity todoToUpdate);
+    boolean updateTodo(String user, TodoEntity todoToUpdate);
 
     /**
      * Deletes a ToDo note.
@@ -38,6 +38,6 @@ public interface ITodoRepository {
      * @param id
      * @return true, if the ToDo note was deleted correctly, otherwise, false is returned.
      */
-    boolean DeleteTodo(String user, int id);
+    boolean deleteTodo(String user, int id);
 
 }

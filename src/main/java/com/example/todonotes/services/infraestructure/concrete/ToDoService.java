@@ -13,6 +13,9 @@ import com.example.todonotes.services.infraestructure.abstraction.IToDoService;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
+/**
+ * Implementation of the login of management of ToDo notes exposed by IToDoService.
+ */
 @Service
 public class ToDoService implements IToDoService {
 
@@ -24,11 +27,11 @@ public class ToDoService implements IToDoService {
     }
     
     @Override
-    public List<TodoResponseModel> GetToDoByUser(String user) {
+    public List<TodoResponseModel> getToDoByUser(String user) {
         List<TodoResponseModel> listTodoResponseModel = new ArrayList<TodoResponseModel>();
         List<TodoEntity> listTodoEntity;
 
-        listTodoEntity = todoRepository.GetToDo(user);
+        listTodoEntity = todoRepository.getToDo(user);
 
         for (TodoEntity todoEntity : listTodoEntity) {
             listTodoResponseModel.add(new TodoResponseModel(todoEntity.getId()
@@ -41,29 +44,29 @@ public class ToDoService implements IToDoService {
     }
 
     @Override
-    public boolean AddTodo(String user, AddTodoRequestModel todoToAdd) {
+    public boolean addTodo(String user, AddTodoRequestModel todoToAdd) {
 
         TodoEntity todoEntity = new TodoEntity(-1
             , todoToAdd.getPriority()
             , todoToAdd.getGroup()
             , todoToAdd.getNote());
 
-        return todoRepository.AddToDo(user, todoEntity);
+        return todoRepository.addToDo(user, todoEntity);
     }
 
     @Override
-    public boolean UpdateTodo(String user, UpdateTodoRequestModel todoToUpdate) {
+    public boolean updateTodo(String user, UpdateTodoRequestModel todoToUpdate) {
 
         TodoEntity todoEntity = new TodoEntity(todoToUpdate.getId()
             , todoToUpdate.getPriority()
             , todoToUpdate.getGroup()
             , todoToUpdate.getNote());
 
-        return todoRepository.UpdateTodo(user, todoEntity);
+        return todoRepository.updateTodo(user, todoEntity);
     }
 
     @Override
-    public boolean DeleteTodo(String user, int id) {       
-        return todoRepository.DeleteTodo(user, id);
+    public boolean deleteTodo(String user, int id) {       
+        return todoRepository.deleteTodo(user, id);
     }
 }

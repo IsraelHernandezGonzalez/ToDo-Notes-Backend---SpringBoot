@@ -14,10 +14,10 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 @SpringBootApplication
-public class TodoApplication {
+public class TodoNotesApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TodoApplication.class, args);
+		SpringApplication.run(TodoNotesApplication.class, args);
 	}
 
 	@Bean
