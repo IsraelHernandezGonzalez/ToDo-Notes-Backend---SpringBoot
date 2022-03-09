@@ -16,7 +16,7 @@ public interface IToDoService {
      * @param user
      * @return List of ToDo notes of the specified user.
      */
-    List<TodoResponseModel> GetToDoByUser(String user);
+    List<TodoResponseModel> getToDoByUser(String user);
 
     /**
      * Adds a ToDo note to the group of ones of an user.
@@ -24,7 +24,7 @@ public interface IToDoService {
      * @param todoToAdd ToDo to be added.
      * @return true, if the ToDo was added correctly, otherwise, false is returned.
      */
-    boolean AddTodo(String user, AddTodoRequestModel todoToAdd);
+    boolean addTodo(String user, AddTodoRequestModel todoToAdd);
 
     /**
      * Updates a ToDo note.
@@ -32,7 +32,7 @@ public interface IToDoService {
      * @param todoToUpdate
      * @return true, if the ToDo was updated correctly, otherwise, false is returned.
      */
-    boolean UpdateTodo(String user, UpdateTodoRequestModel todoToUpdate);
+    boolean updateTodo(String user, UpdateTodoRequestModel todoToUpdate);
 
     /**
      * Deletes a ToDo note.
@@ -40,6 +40,6 @@ public interface IToDoService {
      * @param id
      * @return true, if the ToDo note was deleted correctly, otherwise, false is returned.
      */
-    boolean DeleteTodo(String user, int id);
+    boolean deleteTodo(String user, int id);
     
 }
