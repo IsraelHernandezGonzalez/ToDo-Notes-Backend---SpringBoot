@@ -3,7 +3,7 @@ package com.example.todonotes.services.infraestructure.abstraction;
 /**
  * Interface associated with the management of user authentication.
  */
-public interface IAuthenticationervice {
+public interface IAuthenticationService {
     
     /**
      * Checks if an user is a valid user in the system.

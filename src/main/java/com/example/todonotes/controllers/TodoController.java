@@ -30,12 +30,12 @@ public class TodoController {
   
     @GetMapping("/ToDo/{user}")
 	public List<TodoResponseModel> getTodoList(@PathVariable String user) {
-       return todoService.GetToDoByUser(user);
+       return todoService.getToDoByUser(user);
 	}    
 
     @PostMapping("/ToDo/{user}")
     public boolean addTodo(@PathVariable String user, @RequestBody AddTodoRequestModel todoToAdd) {    
-        return todoService.AddTodo(user, todoToAdd);
+        return todoService.addTodo(user, todoToAdd);
     }
 
     @DeleteMapping("/ToDo/{user}/{id}")
@@ -43,7 +43,7 @@ public class TodoController {
 
         Logger.getLogger(TodoController.class.getName()).info("deleteTodo(" + Integer.toString(id) + ")");
         
-        return todoService.DeleteTodo(user, id);
+        return todoService.deleteTodo(user, id);
     }
 
     @PutMapping("/ToDo/{user}")
@@ -51,7 +51,7 @@ public class TodoController {
 
         Logger.getLogger(TodoController.class.getName()).info("updateTodo(...)");
         
-        return todoService.UpdateTodo(user, todoToUpdate);
+        return todoService.updateTodo(user, todoToUpdate);
 
     }
 }
