@@ -1,0 +1,76 @@
+package com.example.todonotes.infraestructure.configuration;
+
+import com.example.todonotes.infraestructure.filters.AuthorizationRequestFilter;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+/**
+ * Configuration class to customize WebSecurity and HTTPSecurity.
+ */
+@Configuration
+@EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+	@Autowired
+	private RejectAuthenticationEntryPoint authenticationEntryPoint;
+
+	@Autowired
+	private UserDetailsService userDetailsService;
+
+	@Autowired
+	private AuthorizationRequestFilter requestFilter;
+
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+
+	@Bean
+	@Override
+	public AuthenticationManager authenticationManagerBean() throws Exception {
+		return super.authenticationManagerBean();
+	}
+	
+	@Override
+	public void configure(AuthenticationManagerBuilder auth) throws Exception {
+		// Configure AuthenticationManager so that it knows from where to load user for matching credentials
+		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+	}
+
+	@Override
+	protected void configure(HttpSecurity httpSecurity) throws Exception {
+
+        // TODO : What is CSRF ?
+        
+		// We don't need CSRF for this example
+		httpSecurity.csrf().disable()
+				// dont authenticate this particular request
+				.authorizeRequests().antMatchers("/authentication/login").permitAll()	
+				// all other requests need to be authenticated
+				.anyRequest().authenticated()
+				.and()
+				// make sure we use stateless session; session won't be used to
+				// store user's state.
+				.exceptionHandling().authenticationEntryPoint(authenticationEntryPoint)
+				.and()
+				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+		// Add a filter to validate the tokens with every request
+		httpSecurity.addFilterBefore(requestFilter, UsernamePasswordAuthenticationFilter.class);
+	}
+}

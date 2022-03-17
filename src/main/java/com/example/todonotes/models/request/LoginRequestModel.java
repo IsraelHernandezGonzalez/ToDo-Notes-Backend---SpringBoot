@@ -1,16 +1,15 @@
 package com.example.todonotes.models.request;
 
 public class LoginRequestModel {
-    private String user;
+    private String userName;
     private String password;
 
-
-    public String getUser() {
-        return this.user;
+    public String getUserName() {
+        return this.userName;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {

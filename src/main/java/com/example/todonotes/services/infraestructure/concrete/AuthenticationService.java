@@ -1,7 +1,18 @@
 package com.example.todonotes.services.infraestructure.concrete;
 
+import java.util.Objects;
+
+import com.example.todonotes.infraestructure.utils.JwtTokenUtility;
+import com.example.todonotes.models.response.LoginResponseModel;
 import com.example.todonotes.services.infraestructure.abstraction.IAuthenticationService;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.DisabledException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -10,14 +21,37 @@ import org.springframework.stereotype.Service;
 @Service
 public class AuthenticationService implements IAuthenticationService {
 
+    @Autowired
+	private AuthenticationManager authenticationManager;
+	
+	@Autowired
+	private UserDetailsService userDetailsService;
+    
+	@Autowired
+	private JwtTokenUtility jwtTokenUtility;
+
     @Override
-    public boolean login(String user, String password) {
+    public LoginResponseModel login(String userName, String password) throws Exception {
+        
+        Objects.requireNonNull(userName);
+		Objects.requireNonNull(password);
 
-        if (user.equals("demo") && password.equals("demo")) {
-            return true;
-        }
+		try {
 
-        return false;
+			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userName, password));
+
+			// TODO : modify the catch section ?
+
+		} catch (DisabledException e) {
+			throw new Exception("USER_DISABLED", e);
+		} catch (BadCredentialsException e) {
+			throw new Exception("INVALID_CREDENTIALS", e);
+		}
+
+        UserDetails userDetails = userDetailsService.loadUserByUsername(userName);
+        String jwtToken = jwtTokenUtility.generateToken(userDetails);
+
+        return new LoginResponseModel(jwtToken);
     }
     
 }
