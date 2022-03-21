@@ -11,6 +11,7 @@ import com.example.todonotes.services.infraestructure.abstraction.IToDoService;
 import com.example.todonotes.services.infraestructure.concrete.ToDoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,36 +23,52 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class TodoController {
     
     private final IToDoService todoService;
+    private final Logger logger =  Logger.getLogger(TodoController.class.getName());
+
+    private String getCurrentUserName() {
+        return SecurityContextHolder.getContext().getAuthentication().getName();
+    }
+
 
     @Autowired    
     public TodoController(ToDoService todoService) {
         this.todoService = todoService;
     }
   
-    @GetMapping("/ToDo/{user}")
-	public List<TodoResponseModel> getTodoList(@PathVariable String user) {
-       return todoService.getToDoByUser(user);
+    @GetMapping("/ToDo")
+	public List<TodoResponseModel> getTodoList() {
+
+        String userName = getCurrentUserName();
+
+        return todoService.getToDoByUser(userName);
 	}    
 
-    @PostMapping("/ToDo/{user}")
-    public boolean addTodo(@PathVariable String user, @RequestBody AddTodoRequestModel todoToAdd) {    
-        return todoService.addTodo(user, todoToAdd);
+    @PostMapping("/ToDo")
+    public boolean addTodo(@RequestBody AddTodoRequestModel todoToAdd) {    
+
+        String userName = getCurrentUserName();
+
+        return todoService.addTodo(userName, todoToAdd);
     }
 
-    @DeleteMapping("/ToDo/{user}/{id}")
-    public boolean deleteTodo(@PathVariable String user, @PathVariable int id) {    
-
-        Logger.getLogger(TodoController.class.getName()).info("deleteTodo(" + Integer.toString(id) + ")");
+    @DeleteMapping("/ToDo/{id}")
+    public boolean deleteTodo(@PathVariable int id) {    
         
-        return todoService.deleteTodo(user, id);
+        logger.info("deleteTodo(" + Integer.toString(id) + ")");
+        
+        String userName = getCurrentUserName();
+        
+        return todoService.deleteTodo(userName, id);
     }
 
-    @PutMapping("/ToDo/{user}")
-    public boolean updateTodo(@PathVariable String user, @RequestBody UpdateTodoRequestModel todoToUpdate) {
+    @PutMapping("/ToDo")
+    public boolean updateTodo(@RequestBody UpdateTodoRequestModel todoToUpdate) {
 
-        Logger.getLogger(TodoController.class.getName()).info("updateTodo(...)");
+        logger.info("updateTodo(...)");
         
-        return todoService.updateTodo(user, todoToUpdate);
+        String userName = getCurrentUserName();
+
+        return todoService.updateTodo(userName, todoToUpdate);
 
     }
 }
