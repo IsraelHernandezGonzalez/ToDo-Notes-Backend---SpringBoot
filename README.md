@@ -5,6 +5,7 @@ This project was created as a practice exercise and a first contact with Spring 
 ## Goals to achieve
 
 - Use a data persistence system (for instance, MySQL).
+- Unit tests.
 
 ## Achieved goals
 

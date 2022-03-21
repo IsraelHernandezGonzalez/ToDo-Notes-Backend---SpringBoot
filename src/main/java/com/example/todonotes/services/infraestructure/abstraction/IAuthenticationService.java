@@ -13,5 +13,5 @@ public interface IAuthenticationService {
      * @param password of the user in the system.
      * @return if the user and password are correct, an instance of LoginResponseModel with the response model is returned, otherwise null.
      */
-    LoginResponseModel login(String user, String password) throws Exception;
+    LoginResponseModel login(String userName, String password) throws Exception;
 }
