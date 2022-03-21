@@ -54,21 +54,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
-
-        // TODO : What is CSRF ?
-        
-		// We don't need CSRF for this example
-		httpSecurity.csrf().disable()
-				// dont authenticate this particular request
-				.authorizeRequests().antMatchers("/authentication/login").permitAll()	
-				// all other requests need to be authenticated
-				.anyRequest().authenticated()
-				.and()
-				// make sure we use stateless session; session won't be used to
-				// store user's state.
-				.exceptionHandling().authenticationEntryPoint(authenticationEntryPoint)
-				.and()
-				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        		
+		httpSecurity
+			// CSRF is disabled to be able to test the application in localhost.
+			.csrf().disable()
+			// Not check authorization for /authentication/login endpint.
+			.authorizeRequests().antMatchers("/authentication/login").permitAll()	
+			// All other requests need to be authenticated
+			.anyRequest().authenticated()
+			.and()
+			// make sure we use stateless session; session won't be used to
+			// store user's state.
+			.exceptionHandling().authenticationEntryPoint(authenticationEntryPoint)
+			.and()
+			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
 		// Add a filter to validate the tokens with every request
 		httpSecurity.addFilterBefore(requestFilter, UsernamePasswordAuthenticationFilter.class);
