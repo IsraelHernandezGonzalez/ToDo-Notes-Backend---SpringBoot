@@ -57,7 +57,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         		
 		httpSecurity
 			// CSRF is disabled to be able to test the application in localhost.
-			.csrf().disable()
+			.csrf().disable()	
+			.cors()
+			.and()		
 			// Not check authorization for /authentication/login endpint.
 			.authorizeRequests().antMatchers("/authentication/login").permitAll()	
 			// All other requests need to be authenticated

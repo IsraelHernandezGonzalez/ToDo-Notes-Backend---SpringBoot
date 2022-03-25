@@ -39,7 +39,7 @@ public class AuthenticationService implements IAuthenticationService {
         UserDetails userDetails = userDetailsService.loadUserByUsername(userName);
         String jwtToken = jwtTokenUtility.generateToken(userDetails);
 
-        return new LoginResponseModel(jwtToken);
+        return new LoginResponseModel(userDetails.getUsername(), jwtToken);
     }
     
 }
