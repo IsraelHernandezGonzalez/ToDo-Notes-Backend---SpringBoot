@@ -20,26 +20,23 @@ public interface IToDoService {
 
     /**
      * Adds a ToDo note to the group of ones of an user.
-     * @param user
-     * @param todoToAdd ToDo to be added.
+     * @param todoToAdd ToDo note to add to the repository.
      * @return true, if the ToDo was added correctly, otherwise, false is returned.
      */
     boolean addTodo(String user, AddTodoRequestModel todoToAdd);
 
     /**
-     * Updates a ToDo note.
-     * @param user
-     * @param todoToUpdate
+     * Updates a ToDo note.     
+     * @param todoToUpdate ToDo note instance to update in repository.
      * @return true, if the ToDo was updated correctly, otherwise, false is returned.
      */
     boolean updateTodo(String user, UpdateTodoRequestModel todoToUpdate);
 
     /**
-     * Deletes a ToDo note.
-     * @param user
-     * @param id
+     * Deletes a ToDo note.     
+     * @param id identifiar of ToDo note to remove.
      * @return true, if the ToDo note was deleted correctly, otherwise, false is returned.
      */
-    boolean deleteTodo(String user, int id);
+    boolean deleteTodo(String user, Long id);
     
 }

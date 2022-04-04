@@ -25,13 +25,13 @@ public class ToDoService implements IToDoService {
     public ToDoService(ITodoRepository todoRepository) {
         this.todoRepository = todoRepository;
     }
-    
+
     @Override
-    public List<TodoResponseModel> getToDoByUser(String user) {
+    public List<TodoResponseModel> getToDoByUser(String userName) {
         List<TodoResponseModel> listTodoResponseModel = new ArrayList<TodoResponseModel>();
         List<TodoEntity> listTodoEntity;
 
-        listTodoEntity = todoRepository.getToDo(user);
+        listTodoEntity = todoRepository.getToDo(userName);
 
         for (TodoEntity todoEntity : listTodoEntity) {
             listTodoResponseModel.add(new TodoResponseModel(todoEntity.getId()
@@ -44,29 +44,29 @@ public class ToDoService implements IToDoService {
     }
 
     @Override
-    public boolean addTodo(String user, AddTodoRequestModel todoToAdd) {
+    public boolean addTodo(String userName, AddTodoRequestModel todoToAdd) {
 
-        TodoEntity todoEntity = new TodoEntity(-1
+        TodoEntity todoEntity = new TodoEntity(-1L
             , todoToAdd.getPriority()
             , todoToAdd.getGroup()
             , todoToAdd.getNote());
 
-        return todoRepository.addToDo(user, todoEntity);
+        return todoRepository.addToDo(todoEntity);
     }
 
     @Override
-    public boolean updateTodo(String user, UpdateTodoRequestModel todoToUpdate) {
+    public boolean updateTodo(String userName, UpdateTodoRequestModel todoToUpdate) {
 
         TodoEntity todoEntity = new TodoEntity(todoToUpdate.getId()
             , todoToUpdate.getPriority()
             , todoToUpdate.getGroup()
             , todoToUpdate.getNote());
 
-        return todoRepository.updateTodo(user, todoEntity);
+        return todoRepository.updateTodo(todoEntity);
     }
 
     @Override
-    public boolean deleteTodo(String user, int id) {       
-        return todoRepository.deleteTodo(user, id);
+    public boolean deleteTodo(String user, Long id) {       
+        return todoRepository.deleteTodo(id);
     }
 }

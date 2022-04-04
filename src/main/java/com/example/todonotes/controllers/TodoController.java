@@ -52,9 +52,9 @@ public class TodoController {
     }
 
     @DeleteMapping("/ToDo/{id}")
-    public boolean deleteTodo(@PathVariable int id) {    
+    public boolean deleteTodo(@PathVariable Long id) {    
         
-        logger.info("deleteTodo(" + Integer.toString(id) + ")");
+        logger.info("deleteTodo(" + Long.toString(id) + ")");
         
         String userName = getCurrentUserName();
         
