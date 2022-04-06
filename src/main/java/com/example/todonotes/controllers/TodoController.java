@@ -1,6 +1,10 @@
 package com.example.todonotes.controllers;
 
 import org.springframework.web.bind.annotation.RestController;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -20,6 +24,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
+@Api("ToDo Notes CRUD")
 public class TodoController {
     
     private final IToDoService todoService;
@@ -35,6 +40,7 @@ public class TodoController {
         this.todoService = todoService;
     }
   
+    @ApiOperation(value = "Get user's ToDo Notes")
     @GetMapping("/ToDo")
 	public List<TodoResponseModel> getTodoList() {
 

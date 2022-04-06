@@ -26,6 +26,14 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+	private static final String[] AUTH_WHITELIST = {
+        "/authentication/login",
+        "/swagger-resources/**",
+        "/swagger-ui/**",
+        "/v3/api-docs",
+        "/webjars/**"
+};
+
 	@Autowired
 	private RejectAuthenticationEntryPoint authenticationEntryPoint;
 
@@ -54,15 +62,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
-        		
+      
 		httpSecurity
 			// CSRF is disabled to be able to test the application in localhost.
 			.csrf().disable()	
-			.cors()
-			.and()		
-			// Not check authorization for /authentication/login endpint.
-			.authorizeRequests().antMatchers("/authentication/login").permitAll()	
-			// All other requests need to be authenticated
+			.cors()			
+			.and()					
+			.authorizeRequests()
+			// don't authenticate this particular requests
+			.antMatchers(AUTH_WHITELIST).permitAll()
+			// all other requests need to be authenticated
 			.anyRequest().authenticated()
 			.and()
 			// make sure we use stateless session; session won't be used to
@@ -73,5 +82,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		// Add a filter to validate the tokens with every request
 		httpSecurity.addFilterBefore(requestFilter, UsernamePasswordAuthenticationFilter.class);
+
 	}
 }

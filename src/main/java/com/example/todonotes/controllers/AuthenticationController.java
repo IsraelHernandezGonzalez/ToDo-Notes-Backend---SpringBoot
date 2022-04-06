@@ -2,6 +2,8 @@ package com.example.todonotes.controllers;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.Api;
+
 import com.example.todonotes.models.request.LoginRequestModel;
 import com.example.todonotes.models.response.LoginResponseModel;
 import com.example.todonotes.services.infraestructure.abstraction.IAuthenticationService;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
+@Api("Authentication logic")
 public class AuthenticationController {
 
     @Autowired
@@ -27,5 +30,5 @@ public class AuthenticationController {
 
 	    return ResponseEntity.ok(loginResponseModel);
 	}
-    
+
 }
