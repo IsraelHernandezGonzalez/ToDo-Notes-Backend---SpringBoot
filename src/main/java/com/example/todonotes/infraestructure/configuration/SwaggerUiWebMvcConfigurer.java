@@ -5,6 +5,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+// TODO : Remove if not used.
 public class SwaggerUiWebMvcConfigurer implements WebMvcConfigurer {
     private final String baseUrl;
   

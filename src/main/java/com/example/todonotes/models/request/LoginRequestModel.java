@@ -1,5 +1,8 @@
 package com.example.todonotes.models.request;
 
+import io.swagger.annotations.ApiModel;
+
+@ApiModel("Login parameters")
 public class LoginRequestModel {
     private String userName;
     private String password;
